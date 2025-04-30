@@ -1,0 +1,167 @@
+/* Schedule Page Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #282626;
+    color: #ffffff;
+}
+
+.schedule-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Movie Row Layout */
+.movie-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+/* Movie Card Styles */
+.movie-card {
+    width: 48%;
+    background-color: #3f3b3b;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.movie-info {
+    display: flex;
+}
+
+.movie-poster {
+    width: 180px;
+    height: 270px;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.movie-details {
+    flex: 1;
+}
+
+.movie-details h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+.rating {
+    font-size: 14px;
+    color: #d9d9d9;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #d9d9d9;
+    margin-bottom: 15px;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+/* Showtimes Styles */
+.showtimes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-top: 1px solid #4c4c4c;
+    padding-top: 15px;
+}
+
+.day {
+    text-align: center;
+    width: 33%;
+}
+
+.day h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.time-slot {
+    background-color: #4c4c4c;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+/* Book Button Styles */
+.book-btn {
+    display: block;
+    width: 120px;
+    background-color: #7a0606;
+    color: #ffffff;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 auto;
+    transition: background-color 0.3s;
+}
+
+.book-btn:hover {
+    background-color: #9e0808;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .movie-row {
+        flex-direction: column;
+    }
+    
+    .movie-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .movie-info {
+        flex-direction: column;
+    }
+    
+    .movie-poster {
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .movie-poster img {
+        max-height: 300px;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 576px) {
+    .showtimes {
+        flex-direction: column;
+    }
+    
+    .day {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+}
