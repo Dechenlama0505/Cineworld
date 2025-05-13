@@ -9,26 +9,13 @@ import jakarta.servlet.http.HttpSession;
  */
 public class sessionUtil {
 
-    /**
-     * Sets an attribute in the session.
-     *
-     * @param request the HttpServletRequest from which the session is obtained
-     * @param key     the key under which the attribute is stored
-     * @param value   the value of the attribute to store in the session
-     */
+    // Set an attribute in the session
     public static void setAttribute(HttpServletRequest request, String key, Object value) {
         HttpSession session = request.getSession();
         session.setAttribute(key, value);
     }
 
-    /**
-     * Retrieves an attribute from the session.
-     *
-     * @param request the HttpServletRequest from which the session is obtained
-     * @param key     the key of the attribute to retrieve
-     * @return the attribute value, or null if the attribute does not exist or the
-     * session is invalid
-     */
+    // Get an attribute from the session
     public static Object getAttribute(HttpServletRequest request, String key) {
         HttpSession session = request.getSession(false);
         if (session != null) {
@@ -37,12 +24,7 @@ public class sessionUtil {
         return null;
     }
 
-    /**
-     * Removes an attribute from the session.
-     *
-     * @param request the HttpServletRequest from which the session is obtained
-     * @param key     the key of the attribute to remove
-     */
+    // Remove an attribute from the session
     public static void removeAttribute(HttpServletRequest request, String key) {
         HttpSession session = request.getSession(false);
         if (session != null) {
@@ -50,11 +32,7 @@ public class sessionUtil {
         }
     }
 
-    /**
-     * Invalidates the current session.
-     *
-     * @param request the HttpServletRequest from which the session is obtained
-     */
+    // Invalidate the session
     public static void invalidateSession(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {

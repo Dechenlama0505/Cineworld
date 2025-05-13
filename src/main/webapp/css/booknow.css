@@ -1,0 +1,272 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Karla', sans-serif;
+}
+
+body {
+  background-color: #262626; /* neutral-800 */
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header and Logo */
+.header {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25rem 0;
+}
+
+.logo {
+  font-size: 1.875rem;
+  font-weight: 800;
+}
+
+.logo-cine {
+  color: white;
+}
+
+.logo-world {
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.375rem;
+  background-color: #d4d4d4; /* zinc-300 */
+  color: #262626; /* neutral-800 */
+}
+
+/* Navigation */
+.main-nav {
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.nav-item {
+  color: white;
+}
+
+.nav-item.active {
+  color: #7f1d1d; /* red-900 */
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  display: none;
+  justify-content: flex-end;
+  padding: 0 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.menu-icon {
+  font-size: 1.5rem;
+  color: white;
+}
+
+/* Divider */
+.divider {
+  margin: 0 7rem;
+  border-top: 1px solid white;
+}
+
+/* Screen Container */
+.screen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2.5rem;
+  width: 499px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.screen-top-border {
+  border-top: 1px solid white;
+  width: 100%;
+}
+
+.screen {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.screen-svg {
+  width: 409px;
+  height: 14px;
+  max-width: 100%;
+}
+
+.screen-label {
+  margin-top: -1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+  color: white;
+}
+
+/* Seats Grid */
+.seats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2.5rem;
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.seat {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+  color: white;
+}
+
+.screen-bottom-border {
+  margin-top: 4rem;
+  border-bottom: 1px solid white;
+  width: 100%;
+}
+
+/* Booking Form */
+.booking-form {
+  margin: 2.5rem 10rem 0;
+  padding: 2.5rem;
+  border: 1px solid #7f1d1d; /* red-700 */
+  border-radius: 0.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  margin-bottom: 0.625rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+}
+
+.form-input {
+  width: 12rem;
+  height: 29px;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 0 0.5rem;
+}
+
+/* Select Container */
+.select-container {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.form-select {
+  padding: 0 0.75rem;
+  height: 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 0.375rem;
+}
+
+.form-select:first-child {
+  width: 93px;
+}
+
+.form-select:last-child {
+  width: 101px;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.form-button {
+  width: 91px;
+  height: 29px;
+  font-size: 1rem;
+  color: white;
+  background-color: #7f1d1d; /* red-900 */
+  border: 1px solid #525252; /* neutral-600 */
+  border-radius: 32px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 640px) {
+  .main-nav {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .divider {
+    margin: 0 1.25rem;
+  }
+
+  .screen-container {
+    margin: 2.5rem 1.25rem 0;
+    width: auto;
+  }
+
+  .seats-grid {
+    gap: 1.25rem;
+  }
+
+  .booking-form {
+    margin: 2.5rem 1.25rem 0;
+    padding: 1.25rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-input {
+    width: 100%;
+  }
+
+  .select-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+}

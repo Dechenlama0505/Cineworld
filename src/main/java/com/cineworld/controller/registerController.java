@@ -60,4 +60,3 @@ public class registerController extends HttpServlet {
     	
     }
 }
-

@@ -74,6 +74,10 @@
     background-color: #3f3b3b;
 }
 
+#bookingsTableBody{
+	color: white;
+}
+
 /* Booking Form Section */
 .booking-form-section {
     display: flex;

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp" %>
+<%@ include file="adminheader.jsp" %>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/book.css">
 
@@ -145,6 +145,7 @@
         
         // Add booking
         document.getElementById('addBtn').addEventListener('click', function() {
+        	event.preventDefault();
             const name = document.getElementById('bookingName').value;
             const movie = document.getElementById('bookingMovie').value;
             const date = document.getElementById('bookingDate').value;
@@ -253,8 +254,10 @@
             updateBookingsTable(filteredBookings);
         });
         
+//problem and solution: when the booking was not visible on my table 
+
         // Update bookings table
-        function updateBookingsTable(bookingsToShow = bookings) {
+       /*  function updateBookingsTable(bookingsToShow = bookings) {
             const tableBody = document.getElementById('bookingsTableBody');
             tableBody.innerHTML = '';
             
@@ -303,6 +306,80 @@
                     });
                 });
                 
+                tableBody.appendChild(row);
+            });
+        } */
+        
+        function updateBookingsTable(bookingsToShow = bookings) {
+            const tableBody = document.getElementById('bookingsTableBody');
+            tableBody.innerHTML = '';  // Clear the existing table rows
+
+            bookingsToShow.forEach(booking => {
+                const row = document.createElement('tr');  // Create a new row
+               
+                // Set text inside each <td> for the booking details
+                const idCell = document.createElement('td');
+                idCell.textContent = booking.id;  // Set the booking ID
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = booking.name;  // Set the booking name
+
+                const movieCell = document.createElement('td');
+                movieCell.textContent = booking.movie;  // Set the movie name
+
+                const dateCell = document.createElement('td');
+                dateCell.textContent = booking.date;  // Set the booking date
+
+                const timeCell = document.createElement('td');
+                timeCell.textContent = booking.time;  // Set the booking time
+
+                const seatCell = document.createElement('td');
+                seatCell.textContent = booking.seat;  // Set the seat number
+
+                // Append the cells to the row
+                row.appendChild(idCell);
+                row.appendChild(nameCell);
+                row.appendChild(movieCell);
+                row.appendChild(dateCell);
+                row.appendChild(timeCell);
+                row.appendChild(seatCell);
+
+                // Add a click event to each row
+                row.addEventListener('click', function() {
+                    document.getElementById('bookingId').value = booking.id;
+                    document.getElementById('bookingName').value = booking.name;
+
+                    // Set select values for movie and time
+                    const movieSelect = document.getElementById('bookingMovie');
+                    const timeSelect = document.getElementById('bookingTime');
+
+                    for (let i = 0; i < movieSelect.options.length; i++) {
+                        if (movieSelect.options[i].value === booking.movie) {
+                            movieSelect.selectedIndex = i;
+                            break;
+                        }
+                    }
+
+                    for (let i = 0; i < timeSelect.options.length; i++) {
+                        if (timeSelect.options[i].value === booking.time) {
+                            timeSelect.selectedIndex = i;
+                            break;
+                        }
+                    }
+
+                    document.getElementById('bookingDate').value = booking.date;
+                    document.getElementById('bookingSeat').value = booking.seat;
+
+                    // Highlight the selected seat
+                    seats.forEach(seat => {
+                        if (seat.getAttribute('data-seat') === booking.seat) {
+                            seats.forEach(s => s.classList.remove('selected'));
+                            seat.classList.add('selected');
+                        }
+                    });
+                });
+
+                // Append the row to the table body
                 tableBody.appendChild(row);
             });
         }

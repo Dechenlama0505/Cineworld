@@ -98,5 +98,3 @@ public class userModel {
 			this.password = password;
 		}
 }
-
-
