@@ -17,26 +17,53 @@ import com.cineworld.model.userModel;
 import com.cineworld.service.registerService;
 import com.cineworld.util.passwordUtil;
 
+/**
+ * Servlet implementation class registerController
+ * 
+ * Handles user registration requests including form display and form submission.
+ * Supports multipart form data for uploading a user profile image.
+ * 
+ * <p>Functionality:
+ * <ul>
+ *   <li>doGet(): Forwards to the registration JSP page to display the registration form.</li>
+ *   <li>doPost(): Processes registration form data, handles image upload, encrypts the password,
+ *       and registers the user using userDAO. On success, redirects to login page with a success flag.
+ *       On failure, forwards back to the registration form with an error message.</li>
+ *   <li>getFileName(Part): Extracts the uploaded file's original filename from the multipart request part.</li>
+ * </ul>
+ * </p>
+ * 
+ * <p>File upload limits:
+ * <ul>
+ *   <li>Max file size: 5 MB</li>
+ *   <li>Max request size: 10 MB</li>
+ *   <li>File size threshold for memory buffering: 1 MB</li>
+ * </ul>
+ * </p>
+ * 
+ * @author Dechen Lama
+ */
+
 @WebServlet(asyncSupported = true, urlPatterns = {"/register"})
 @MultipartConfig(
-    fileSizeThreshold = 1024 * 1024, // 1 MB
-    maxFileSize = 1024 * 1024 * 5,   // 5 MB
-    maxRequestSize = 1024 * 1024 * 10 // 10 MB
+    fileSizeThreshold = 1024 * 1024, 
+    maxFileSize = 1024 * 1024 * 5,   
+    maxRequestSize = 1024 * 1024 * 10 
 )
 public class registerController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // Show register form
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Register get");
         request.getRequestDispatcher("WEB-INF/pages/register.jsp").forward(request, response);
     }
 
-    // Handle form submission
+  
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Reached here");
 
-        // Form fields
+
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String phoneNumber = request.getParameter("phoneNumber");
@@ -49,7 +76,6 @@ public class registerController extends HttpServlet {
         System.out.println(imagePart);
         if (imagePart == null || imagePart.getSize() == 0) {
             System.out.println("No image uploaded");
-            // Handle error or return
         } else {
             String fileName = getFileName(imagePart);  // use your method to get the filename
             System.out.println("Uploaded image file name: " + fileName);
@@ -61,24 +87,23 @@ public class registerController extends HttpServlet {
             String filePath = uploadPath + File.separator + fileName;
             imagePart.write(filePath);
         }       
-        // Handle image upload
+
         Part filePart = request.getPart("image");
         String fileName = getFileName(filePart);
 
-        // Path to save the image
+ 
         String uploadDir = getServletContext().getRealPath("/images");
         File uploadFolder = new File(uploadDir);
         if (!uploadFolder.exists()) {
             uploadFolder.mkdirs();
         }
 
-        // Full path where file will be stored
         String filePath = uploadDir + File.separator + fileName;
         filePart.write(filePath);
 
 
 
-        // Create and populate user model
+
         userModel user = new userModel();
         user.setUsername(username);
         user.setEmail(email);
@@ -88,10 +113,9 @@ public class registerController extends HttpServlet {
         user.setPassword(passwordUtil.encrypt(password, username));
         user.setRole(role);
         System.out.println("Image saved at: " + filePath);
-
         user.setImage(fileName); 
 
-        // Register user
+  
         userDAO service = new userDAO();
         boolean isRegistered;
 		try {
@@ -106,12 +130,11 @@ public class registerController extends HttpServlet {
 	            request.getRequestDispatcher("WEB-INF/pages/register.jsp").forward(request, response);
 	        }
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
 
-    // Utility to extract filename from Part header
+
     private String getFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
         for (String token : contentDisp.split(";")) {

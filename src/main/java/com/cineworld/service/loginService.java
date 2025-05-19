@@ -9,18 +9,26 @@ import com.cineworld.model.userModel;
 import com.cineworld.util.passwordUtil;
 
 /**
- * Service class for handling login operations. Connects to the database,
- * verifies user credentials, and returns the logged-in User object.
+ * loginService.java
+ *
+ * Service class for handling user authentication in the Cineworld application.
+ * It interacts with the database to validate user credentials.
+ *
+ * Responsibilities:
+ * - Establishes a database connection using Dbconfig.
+ * - login(userModel): Validates the user's login by matching the username and
+ *   decrypted password from the database.
+ * - Uses passwordUtil to decrypt stored passwords for comparison.
+ * - Handles SQL exceptions and connection issues.
+ *
+ * Author: Dechen Lama
  */
+
 public class loginService {
 
     private Connection dbConn;
     private boolean isConnectionError = false;
 
-    /**
-     * Constructor initializes the database connection. Sets the connection error
-     * flag if the connection fails.
-     */
     public loginService() {
         dbConn = Dbconfig.getDbConnection();
         if (dbConn == null) {
@@ -51,13 +59,7 @@ public class loginService {
         return false;
     }
 
-//    private Boolean validatePassword(ResultSet result, userModel user) throws SQLException {
-//        String dbUsername = result.getString("username");
-//        String dbPassword = result.getString("password");
-//
-//        // For now assuming plain text comparison.
-//        return dbUsername.equals(user.getUsername()) && dbPassword.equals(user.getPassword());
-//    }
+
     private boolean validatePassword(ResultSet result, userModel userModel) throws SQLException {
 		String dbUsername = result.getString("username");
 		String dbPassword = result.getString("password");

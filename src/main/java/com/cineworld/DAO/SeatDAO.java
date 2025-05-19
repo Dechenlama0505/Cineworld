@@ -7,6 +7,20 @@ import java.sql.SQLException;
 
 import com.cineworld.util.DBconnection;
 
+/**
+ * SeatDAO handles operations related to seat bookings for movies.
+ * It allows querying the total seats booked across all movies,
+ * booking seats for a specific movie, and cancelling seat bookings.
+ *
+ * Methods:
+ * - getTotalSeatsBooked(): Returns the total number of seats booked.
+ * - bookSeat(int movieId, int numberOfSeats): Books a specified number of seats for a movie.
+ * - cancelBooking(int movieId, int numberOfSeats): Cancels a specified number of booked seats.
+ *
+ * Author: Dechen Lama
+ */
+
+
 public class SeatDAO {
     private Connection connection;
     
@@ -48,7 +62,6 @@ public class SeatDAO {
     
     public boolean cancelBooking(int movieId, int numberOfSeats) {
         try {
-            // First, update the movie's seats_booked count
             String sql = "UPDATE movies SET seats_booked = seats_booked - ? WHERE id = ? AND seats_booked >= ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, numberOfSeats);

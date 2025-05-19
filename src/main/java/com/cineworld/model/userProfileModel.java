@@ -3,6 +3,18 @@ package com.cineworld.model;
 
 import java.io.Serializable;
 
+/**
+ * userProfileModel.java
+ * 
+ * Model class representing a user's profile in the Cineworld system.
+ * 
+ * Encapsulates user profile details such as id, first name, last name,
+ * username, password, email, phone number, and profile picture.
+ * Implements Serializable for session persistence or object transfer.
+ * 
+ * Author: Dechen Lama
+ */
+
 public class userProfileModel implements Serializable {
     private static final long serialVersionUID = 1L;
     

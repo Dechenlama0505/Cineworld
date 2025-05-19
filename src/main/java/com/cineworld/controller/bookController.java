@@ -1,4 +1,3 @@
-// bookController.java (Admin)
 package com.cineworld.controller;
 
 import com.cineworld.DAO.bookingDAO;
@@ -13,8 +12,21 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
-@WebServlet(asyncSupported = true, urlPatterns = { "/admin/bookcontrol" })
 
+/**
+ * bookController.java
+ * 
+ * Servlet controller for managing bookings in the admin panel.
+ * 
+ * Responsibilities:
+ * - Handles CRUD operations (create, read, update, delete) for bookings.
+ * - Allows searching bookings by ID, name, or date.
+ * - Restricts access to users with admin role.
+ * 
+ * Author: Dechen Lama
+ */
+
+@WebServlet(asyncSupported = true, urlPatterns = { "/admin/bookcontrol" })
 public class bookController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private bookingDAO bookingDAO;
@@ -42,34 +54,6 @@ public class bookController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        String action = request.getParameter("action");
-//        System.out.println("2");
-//
-//        if (action == null) {
-//            doGet(request, response);
-//            return;
-//        }
-//
-//        switch (action) {
-//            case "add":
-//                System.out.println("3");
-//                addBooking(request, response);
-//                break;
-//            case "update":
-//                updateBooking(request, response);
-//                break;
-//            case "delete":
-//                deleteBooking(request, response);
-//                break;
-//            case "search":
-//                searchBooking(request, response);
-//                break;
-//            default:
-//                doGet(request, response);
-//                System.out.println("1");
-//
-    	
-//        }
     	   System.out.println("1");
     	   String action = request.getParameter("action");
 
@@ -163,19 +147,15 @@ public class bookController extends HttpServlet {
         booking.setSeatNumber(bookingSeat);
         booking.setMovie(bookingMovie);
         booking.setTime(bookingTime);
-//        bookingDAO.createBooking(booking);
         boolean success = bookingDAO.createBooking(booking);
         if (success) {
             request.setAttribute("bookingSuccess", true);
             response.sendRedirect(request.getContextPath() + "/confirmation"); // Redirect
         } else {
             request.setAttribute("bookingError", "Failed to create booking. Please try again.");
-            request.getRequestDispatcher("/WEB-INF/pages/booknow.jsp").forward(request, response); // Forward
+            request.getRequestDispatcher("/WEB-INF/pages/booknow.jsp").forward(request, response); 
         }
         
-//        List<bookingModel> bookings = bookingDAO.getAllBookings();
-//        request.setAttribute("bookings", bookings);
-//        request.getRequestDispatcher("/WEB-INF/pages/bookcontrol.jsp").forward(request, response);
         response.sendRedirect(request.getContextPath() + "/admin/bookcontrol");
     }
 
@@ -195,10 +175,6 @@ public class bookController extends HttpServlet {
         booking.setMovie(bookingMovie);
         booking.setTime(bookingTime);
         bookingDAO.updateBooking(booking);
-
-//        List<bookingModel> bookings = bookingDAO.getAllBookings();
-//        request.setAttribute("bookings", bookings);
-//        request.getRequestDispatcher("/WEB-INF/pages/bookcontrol.jsp").forward(request, response);
         response.sendRedirect(request.getContextPath() + "/admin/bookcontrol");
 
     }

@@ -3,11 +3,24 @@ package com.cineworld.util;
 	import javax.crypto.Cipher;
 	import javax.crypto.spec.SecretKeySpec;
 	import java.util.Base64;
+	/**
+	 * passwordUtil.java
+	 * 
+	 * Utility class for encrypting and decrypting passwords using AES encryption.
+	 * 
+	 * Provides static methods to encrypt plaintext passwords and decrypt encrypted passwords.
+	 * Uses a fixed secret key internally for AES cipher operations.
+	 * 
+	 * Note: This implementation uses a hardcoded key and basic AES, which is not recommended for production security.
+	 * Consider stronger, salted hashing algorithms like bcrypt or Argon2 for password storage.
+	 * 
+	 * Author: Dechen Lama
+	 */
 
 	public class passwordUtil {
 
-	    // You can use a username-based dynamic key if needed, here's a fixed 16-byte key
-	    private static final String SECRET_KEY = "MySuperSecretKey"; // 16 characters
+
+	    private static final String SECRET_KEY = "MySuperSecretKey"; 
 
 	    public static String encrypt(String password, String username) {
 	        try {

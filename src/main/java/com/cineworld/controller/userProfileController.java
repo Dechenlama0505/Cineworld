@@ -12,10 +12,16 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.UUID;
-
 import com.cineworld.model.userModel;
 import com.cineworld.DAO.userDAO;
 import com.cineworld.util.sessionUtil;
+
+/**
+ * Handles user profile-related operations such as viewing, updating profile data,
+ * registering new users, and logging out.
+ * 
+ * Author: Dechen Lama
+ */
 
 @WebServlet(urlPatterns = {
     "/userProfile",
@@ -23,9 +29,9 @@ import com.cineworld.util.sessionUtil;
     "/updateProfilePicture"
 })
 @MultipartConfig(
-    fileSizeThreshold = 1024 * 1024, // 1 MB
-    maxFileSize = 1024 * 1024 * 10,  // 10 MB
-    maxRequestSize = 1024 * 1024 * 15 // 15 MB
+    fileSizeThreshold = 1024 * 1024, 
+    maxFileSize = 1024 * 1024 * 10,  
+    maxRequestSize = 1024 * 1024 * 15 
 )
 public class userProfileController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -66,7 +72,6 @@ public class userProfileController extends HttpServlet {
                 updateProfile(request, response);
                 break;
             case "/updateProfilePicture":
-                // We will handle this differently now since there's no profile picture
                 response.sendRedirect("userProfile?error=profile_picture_not_supported");
                 break;
             case "/register":

@@ -1,4 +1,14 @@
 package com.cineworld.util;
+/**
+ * validationUtil.java
+ * 
+ * Utility class providing static methods for common input validations.
+ * 
+ * Includes methods to check for null or empty strings, validate email format,
+ * phone number format, username constraints, and basic password length.
+ * 
+ * Author: Dechen Lama
+ */
 
 public class validationUtil {
 

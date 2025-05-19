@@ -8,47 +8,50 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * logoutController.java
+ * 
+ * Servlet responsible for handling user logout.
+ * 
+ * Functionality:
+ * - Invalidates the current user session if it exists.
+ * - Clears the "Role" cookie by setting its max age to zero.
+ * - Redirects the user to the login page after logout.
+ * - Supports both GET and POST HTTP methods.
+ * 
+ * Author: Dechen Lama
+ */
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/logout" })
 public class logoutController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Handles GET requests to perform logout operations:
-     * - Invalidates the session (if it exists)
-     * - Removes the 'Role' cookie from the client
-     * - Redirects the user to the login page
-     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // Invalidate the user session if it exists
+
         if (req.getSession(false) != null) {
             req.getSession().invalidate();
         }
 
-        // Retrieve all cookies and remove the 'Role' cookie if present
+
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("Role".equals(cookie.getName())) {
                     cookie.setValue("");
                     cookie.setPath("/");
-                    cookie.setMaxAge(0); // Set expiration to remove it
-                    resp.addCookie(cookie); // Add modified cookie to response
+                    cookie.setMaxAge(0); 
+                    resp.addCookie(cookie);
                 }
             }
         }
 
-        // Redirect the user to the login page after logout
+
         resp.sendRedirect(req.getContextPath() + "/login.jsp");
     }
 
-    /**
-     * Delegates POST logout requests to GET logic.
-     */
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         doGet(req, resp);

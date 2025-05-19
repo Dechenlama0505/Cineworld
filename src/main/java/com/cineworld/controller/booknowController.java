@@ -1,4 +1,3 @@
-// booknowController.java (User)
 package com.cineworld.controller;
 
 import com.cineworld.DAO.bookingDAO;
@@ -12,6 +11,12 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Controller for booking seats.
+ * Handles display of booking form and processing booking submissions.
+ *
+ * Author: Dechen Lama
+ */
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/booknow" })
 public class booknowController extends HttpServlet {

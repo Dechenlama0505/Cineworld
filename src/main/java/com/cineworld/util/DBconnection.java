@@ -4,21 +4,33 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * DBconnection.java
+ * 
+ * A utility class responsible for managing database connectivity to the Cineworld MySQL database.
+ * 
+ * Responsibilities:
+ * - Load the MySQL JDBC driver.
+ * - Provide methods for retrieving existing or new database connections.
+ * 
+ * Author: Dechen Lama
+ */
+
 public class DBconnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/cineworld_db"; // Use the correct DB name
-    private static final String USER = "root"; // Replace with actual DB username
-    private static final String PASSWORD = "password"; // Replace with actual DB password
+    private static final String URL = "jdbc:mysql://localhost:3306/cineworld_db"; 
+    private static final String USER = "root"; 
+    private static final String PASSWORD = "password";
     private static Connection connection = null;
 
     static {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); // Load the JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver"); 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    // Lazy Singleton Connection Retrieval
+
     public static Connection getConnection() {
         if (connection == null) {
             try {
@@ -30,7 +42,7 @@ public class DBconnection {
         return connection;
     }
 
-    // Optional: Force create a new connection (if needed in some cases)
+
     public static Connection newConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }

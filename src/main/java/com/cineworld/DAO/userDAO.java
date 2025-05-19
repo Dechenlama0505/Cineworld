@@ -9,10 +9,13 @@ import com.cineworld.config.Dbconfig;
 import com.cineworld.model.userModel;
 import com.cineworld.util.DBconnection;
 import com.cineworld.util.passwordUtil;
-
+/**
+ * userDAO handles user-related operations such as authentication,
+ * registration, profile updates, and various utility methods for user and booking data.
+ *
+ * Author: Dechen Lama
+ */
 public class userDAO {
-
-    // Get total user count
     public int getTotalUsers() {
         int count = 0;
         String sql = "SELECT COUNT(*) FROM user";
@@ -67,7 +70,7 @@ public class userDAO {
         return count;
     }
     
-    // Validate user login
+  
     public userModel validateUser(String username, String password) {
         userModel user = null;
         String sql = "SELECT userid, username, password, role, email, image FROM user WHERE username = ?";
@@ -147,7 +150,7 @@ public class userDAO {
         }
     }
 
-    // Update profile picture
+
     public void updateProfilePicture(int userId, String fileName) throws SQLException {
         String sql = "UPDATE user SET profile_picture = ? WHERE userid = ?";
 
@@ -162,7 +165,7 @@ public class userDAO {
         }
     }
 
-    // Fetch user by username
+
     public userModel getUserByUsername(String username) throws SQLException {
         userModel user = null;
         String sql = "SELECT userid, firstName, lastName, username, email, phoneNumber, role, image FROM user WHERE username = ?";
@@ -192,8 +195,6 @@ public class userDAO {
 
         return user;
     }
-
-    // Optional: Test DB connection
     public boolean testConnection() throws SQLException {
         try (Connection conn = DBconnection.getConnection()) {
             return conn != null && !conn.isClosed();

@@ -1,13 +1,14 @@
 package com.cineworld.controller;
 
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import com.cineworld.model.userModel;
-import com.cineworld.service.loginService; // You might still have this for business logic
+import com.cineworld.service.loginService; 
 import com.cineworld.util.validationUtil;
 import com.cineworld.util.sessionUtil;
 import com.cineworld.DAO.userDAO;
@@ -15,6 +16,23 @@ import com.cineworld.DAO.userDAO;
 import java.io.IOException;
 import java.util.logging.Logger;
 import java.sql.SQLException;
+
+/**
+ * loginController.java
+ * 
+ * Servlet handling user login for Cineworld application.
+ * Supports both admin and regular user authentication.
+ * 
+ * Features:
+ * - Processes GET requests to show login form.
+ * - Processes POST requests to authenticate users.
+ * - Sets session attributes upon successful login.
+ * - Redirects or forwards appropriately based on authentication outcome.
+ * - Tests database connection on servlet initialization.
+ * 
+ * @author Dechen Lama
+ */
+
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/login", "/" })
 public class loginController extends HttpServlet {
@@ -27,7 +45,7 @@ public class loginController extends HttpServlet {
         super.init();
         userDao = new userDAO();
         try {
-            boolean dbConnected = userDao.testConnection(); // Assuming you have this method in userDAO
+            boolean dbConnected = userDao.testConnection(); 
             logger.info("Database connection test on init: " + (dbConnected ? "successful" : "failed"));
         } catch (SQLException e) {
             logger.severe("Failed to test database connection on init: " + e.getMessage());
@@ -50,7 +68,7 @@ public class loginController extends HttpServlet {
         String password = request.getParameter("password");
 
         if (!validationUtil.isNullOrEmpty(username) && !validationUtil.isNullOrEmpty(password)) {
-            userModel loginUser = new userModel(username, password); // Create userModel for login
+            userModel loginUser = new userModel(username, password); 
 
             if ("admin".equals(username) && "admin123".equals(password)) {
                 loginUser.setRole("admin");
@@ -62,17 +80,17 @@ public class loginController extends HttpServlet {
                 return;
             }
 
-            // Assuming your userDao.validateUser now returns a userModel object
+ 
             userModel authenticatedUser = null;
             authenticatedUser = userDao.validateUser(username, password);
 
             if (authenticatedUser != null) {
                 logger.info("User authenticated successfully: " + authenticatedUser.getUsername());
-                authenticatedUser.setRole(authenticatedUser.getRole() != null ? authenticatedUser.getRole() : "user"); // Ensure role is set
+                authenticatedUser.setRole(authenticatedUser.getRole() != null ? authenticatedUser.getRole() : "user"); 
                 sessionUtil.setAttribute(request, "user", authenticatedUser);
                 sessionUtil.setAttribute(request, "role", authenticatedUser.getRole());
                 sessionUtil.setAttribute(request, "username", authenticatedUser.getUsername());
-                response.sendRedirect(request.getContextPath() + "/home"); // Redirect to home after successful login
+                response.sendRedirect(request.getContextPath() + "/home"); 
             } else {
                 logger.warning("Invalid login attempt for username: " + username);
                 request.setAttribute("errorMessage", "Invalid username or password.");

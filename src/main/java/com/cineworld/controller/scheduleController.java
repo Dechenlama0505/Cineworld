@@ -9,6 +9,13 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+/**
+ * scheduleController handles access to the schedule page.
+ * It checks for an active user session before allowing access to the schedule view.
+ *
+ * Author: Dechen Lama
+ */
+
 @WebServlet(urlPatterns = { "/schedule" })
 public class scheduleController extends HttpServlet {
     private static final long serialVersionUID = 1L;

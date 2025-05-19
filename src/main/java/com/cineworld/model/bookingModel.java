@@ -1,4 +1,16 @@
 package com.cineworld.model;
+/**
+ * bookingModel.java
+ * 
+ * Model class representing a booking in the Cineworld system.
+ * 
+ * Contains booking details such as booking ID, booking name, booking date,
+ * seat number, movie title, and time.
+ * 
+ * Used to encapsulate booking information for processing and management.
+ * 
+ * Author: Dechen Lama
+ */
 
 public class bookingModel {
 
@@ -18,7 +30,7 @@ public class bookingModel {
 
     public bookingModel(int bookingId, String bookingName, String bookingDate, String seatNumber, String movie, String time) { // Changed to bookingName
         this.bookingId = bookingId;
-        this.bookingName = bookingName; // Changed to bookingName
+        this.bookingName = bookingName; 
         this.bookingDate = bookingDate;
         this.seatNumber = seatNumber;
         this.movie = movie;
@@ -27,14 +39,14 @@ public class bookingModel {
     
     public bookingModel( String bookingName, String bookingDate, String seatNumber, String movie, String time) { // Changed to bookingName
         super();
-        this.bookingName = bookingName; // Changed to bookingName
+        this.bookingName = bookingName; 
         this.bookingDate = bookingDate;
         this.seatNumber = seatNumber;
         this.movie = movie;
         this.time = time;
     }
 
-    // Getters and setters for all fields
+   
 
     public int getBookingId() {
         return bookingId;
@@ -44,11 +56,11 @@ public class bookingModel {
         this.bookingId = bookingId;
     }
 
-    public String getBookingName() { // Changed to getBookingName
+    public String getBookingName() { 
         return bookingName;
     }
 
-    public void setBookingName(String bookingName) { // Changed to setBookingName
+    public void setBookingName(String bookingName) { 
         this.bookingName = bookingName;
     }
 

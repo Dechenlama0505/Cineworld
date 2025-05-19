@@ -1,4 +1,3 @@
-// BookingDAO.java
 package com.cineworld.DAO;
 
 import com.cineworld.config.Dbconfig;
@@ -16,12 +15,27 @@ import com.cineworld.util.DBconnection;
 
 public class bookingDAO {
 
-    private static final Logger logger = Logger.getLogger(bookingDAO.class.getName());
+private static final Logger logger = Logger.getLogger(bookingDAO.class.getName());
+	/**
+	 * bookingDAO is responsible for managing all database operations related to bookings.
+	 * It includes methods to retrieve all bookings, create a new booking, update an existing
+	 * booking, and delete a booking. It interacts with the database using JDBC.
+	 *
+	 * This DAO class uses the Dbconfig class to obtain database connections.
+	 *
+	 * Methods:
+	 * - getAllBookings(): List all bookings from the database.
+	 * - createBooking(bookingModel booking): Insert a new booking.
+	 * - updateBooking(bookingModel booking): Update an existing booking.
+	 * - deleteBooking(int bookingId): Delete a booking by ID.
+	 *
+	 * Author: Dechen Lama
+	 */
 
-    public bookingDAO() {
+public bookingDAO() {
     }
 
-    public List<bookingModel> getAllBookings() {
+	public List<bookingModel> getAllBookings() {
         List<bookingModel> bookings = new ArrayList<>();
         String sql = "SELECT bookingId, bookingName, bookingDate, seatNumber, movie, time FROM booking";
         Connection connection = null;
@@ -55,38 +69,6 @@ public class bookingDAO {
         return bookings;
     }
 
-//    public bookingModel getBookingById(int bookingId) {
-//        bookingModel booking = null;
-//        String sql = "SELECT bookingId, bookingName, bookingDate, seatNumber, movie, time FROM booking WHERE bookingId = ?";
-//        Connection connection = null;
-//        PreparedStatement preparedStatement = null;
-//        ResultSet resultSet = null;
-//        try {
-//            connection = Dbconfig.getDbConnection();
-//            if (connection == null) {
-//                logger.severe("Failed to get database connection in getBookingById");
-//                return null;
-//            }
-//            preparedStatement = connection.prepareStatement(sql);
-//            preparedStatement.setInt(1, bookingId);
-//            resultSet = preparedStatement.executeQuery();
-//            if (resultSet.next()) {
-//                booking = new bookingModel();
-//                booking.setBookingId(resultSet.getInt("bookingId"));
-//                booking.setBookingName(resultSet.getString("bookingName"));
-//                booking.setBookingDate(resultSet.getString("bookingDate"));
-//                booking.setSeatNumber(resultSet.getString("seatNumber"));
-//                booking.setMovie(resultSet.getString("movie"));
-//                booking.setTime(resultSet.getString("time"));
-//            }
-//        } catch (SQLException e) {
-//            logger.log(Level.SEVERE, "SQLException in getBookingById", e);
-//            e.printStackTrace();
-//        } finally {
-//            closeResources(connection, preparedStatement, resultSet);
-//        }
-//        return booking;
-//    }
 
     public boolean createBooking(bookingModel booking) {
         String sql = "INSERT INTO booking (bookingName, bookingDate, seatNumber, movie, time) VALUES (?, ?, ?, ?, ?)";

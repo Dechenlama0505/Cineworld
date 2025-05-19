@@ -1,6 +1,7 @@
 package com.cineworld.filter;
 
 import java.io.IOException;
+
 import com.cineworld.util.sessionUtil;
 
 import jakarta.servlet.Filter;
@@ -12,6 +13,20 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+/**
+ * authenticationFilter.java
+ * 
+ * A servlet filter to handle authentication and access control across the application.
+ * 
+ * Responsibilities:
+ * - Allows public and static resources to be accessed without authentication.
+ * - Verifies user login status for protected resources.
+ * - Restricts access based on user role (admin or user).
+ * - Redirects unauthorized users to appropriate home or login pages.
+ * 
+ * Author: Dechen Lama
+ */
 
 @WebFilter(asyncSupported = true, urlPatterns = { "/*" })
 public class authenticationFilter implements Filter {

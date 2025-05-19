@@ -10,29 +10,30 @@ import java.io.IOException;
 import com.cineworld.DAO.userDAO;
 
 /**
- * Servlet implementation class MovieController
+ * MovieController.java
+ * 
+ * Servlet controller for the movie dashboard page.
+ * 
+ * Handles GET requests to "/moviecontroller". Retrieves and sets
+ * statistics such as total users, total movies, and total seats booked,
+ * then forwards the request to the movieDashboard JSP page.
+ * 
+ * Author: Dechen Lama
  */
+
 @WebServlet(asyncSupported = true, urlPatterns = { "/moviecontroller" })
 public class MovieController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+ 
     public MovieController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		userDAO user = new userDAO();
 		int totalUsers = user.getTotalUsers();
-		int totalMovies = 4; // assuming this method exists
-	    int totalSeatsBooked = user.getTotalSeatsBooked(); // assuming this method exists
+		int totalMovies = 4; 
+	    int totalSeatsBooked = user.getTotalSeatsBooked(); 
 
 		
 		request.setAttribute("totalUsers", totalUsers);
@@ -43,11 +44,7 @@ public class MovieController extends HttpServlet {
 	}
 	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

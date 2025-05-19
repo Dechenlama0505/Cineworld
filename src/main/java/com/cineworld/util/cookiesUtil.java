@@ -7,33 +7,28 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 
 /**
- * Utility class for managing cookies in a web application. Provides methods to
- * add, retrieve, and delete cookies.
+ * cookiesUtil.java
+ *
+ * A utility class that simplifies working with HTTP cookies in the Cineworld web application.
+ *
+ * Responsibilities:
+ * - addCookie(HttpServletResponse, String, String, int): Adds a cookie with a specified max‑age.
+ * - getCookie(HttpServletRequest, String): Retrieves a cookie by name, or null if it doesn’t exist.
+ * - deleteCookie(HttpServletResponse, String): Deletes a cookie immediately by setting its max‑age to 0.
+ *
+ * Author: Dechen Lama
  */
+
 public class cookiesUtil {
 
-    /**
-     * Adds a cookie with the specified name, value, and maximum age.
-     *
-     * @param response the HttpServletResponse to add the cookie to
-     * @param name     the name of the cookie
-     * @param value    the value of the cookie
-     * @param maxAge   the maximum age of the cookie in seconds
-     */
+ 
     public static void addCookie(HttpServletResponse response, String name, String value, int maxAge) {
         Cookie cookie = new Cookie(name, value);
         cookie.setMaxAge(maxAge);
-        cookie.setPath("/"); // Make cookie available to the entire application
+        cookie.setPath("/"); 
         response.addCookie(cookie);
     }
 
-    /**
-     * Retrieves a cookie by its name from the HttpServletRequest.
-     *
-     * @param request the HttpServletRequest to get the cookie from
-     * @param name     the name of the cookie to retrieve
-     * @return the Cookie object if found, otherwise null
-     */
     public static Cookie getCookie(HttpServletRequest request, String name) {
         if (request.getCookies() != null) {
             return Arrays.stream(request.getCookies()).filter(cookie -> name.equals(cookie.getName())).findFirst()
@@ -42,16 +37,11 @@ public class cookiesUtil {
         return null;
     }
 
-    /**
-     * Deletes a cookie by setting its max age to 0.
-     *
-     * @param response the HttpServletResponse to add the deletion cookie to
-     * @param name     the name of the cookie to delete
-     */
+
     public static void deleteCookie(HttpServletResponse response, String name) {
         Cookie cookie = new Cookie(name, null);
         cookie.setMaxAge(0);
-        cookie.setPath("/"); // Make cookie available to the entire application
+        cookie.setPath("/"); 
         response.addCookie(cookie);
     }
 }

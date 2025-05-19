@@ -1,16 +1,36 @@
 package com.cineworld.service;
 
 import com.cineworld.model.bookingModel;
-import com.cineworld.model.userModel; // Assuming you have a User model
+
+import com.cineworld.model.userModel; 
 import com.cineworld.DAO.bookingDAO;
-import com.cineworld.DAO.userDAO; // Assuming you have a UserDAO
+import com.cineworld.DAO.userDAO; 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * bookingService.java
+ *
+ * Service layer class responsible for handling booking-related operations in the Cineworld application.
+ * It acts as an intermediary between the controller and DAO layers, and manages both in-memory
+ * and database interactions for bookings.
+ *
+ * Responsibilities:
+ * - addBooking(bookingModel): Adds a new booking to an in-memory list with a generated ID.
+ * - getAllBookings(): Retrieves all in-memory bookings.
+ * - deleteBooking(int): Deletes a booking by ID from the in-memory list.
+ * - updateBooking(bookingModel): Updates booking information in the in-memory list.
+ * - getBookingById(int): Retrieves a specific booking by its ID.
+ * - getAllBookingsInfo(): Retrieves all bookings from the database using bookingDAO.
+ *
+ * Author: Dechen Lama
+ */
+
+
 public class bookingService {
     private static final List<bookingModel> bookings = new ArrayList<>();
-    private static int bookingIdCounter = 1; // Simple ID counter
-    private final userDAO userDAO = new userDAO(); // Instantiate your User DAO
+    private static int bookingIdCounter = 1; 
+    private final userDAO userDAO = new userDAO(); 
 
     public boolean addBooking(bookingModel booking) {
         try {
@@ -19,13 +39,13 @@ public class bookingService {
             System.out.println("Booking added: " + booking.getBookingId() + " - " + booking.getBookingName() + " - " + booking.getMovie() + " - " + booking.getBookingDate() + " - " + booking.getSeatNumber() + " - " + booking.getTime());
             return true;
         } catch (Exception e) {
-            e.printStackTrace(); // Simple error output
+            e.printStackTrace(); 
             return false;
         }
     }
 
     public List<bookingModel> getAllBookings() {
-        return new ArrayList<>(bookings); // Return a copy
+        return new ArrayList<>(bookings); 
     }
 
     public boolean deleteBooking(int bookingId) {
@@ -39,7 +59,7 @@ public class bookingService {
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // Simple error output
+            e.printStackTrace(); 
             return false;
         }
     }
@@ -56,7 +76,7 @@ public class bookingService {
             System.out.println("Booking not found with ID: " + updatedBooking.getBookingId() + " for update");
             return false;
         } catch (Exception e) {
-            e.printStackTrace(); // Simple error output
+            e.printStackTrace(); 
             return false;
         }
     }
@@ -70,11 +90,11 @@ public class bookingService {
 
     public List<bookingModel> getAllBookingsInfo() {
         try {
-            bookingDAO dao = new bookingDAO(); // Create DAO instance
-            return dao.getAllBookings();       // Call DAO method
+            bookingDAO dao = new bookingDAO(); 
+            return dao.getAllBookings();       
         } catch (Exception e) {
-            e.printStackTrace();               // Handle any unexpected errors
-            return new ArrayList<>();          // Return empty list on error
+            e.printStackTrace();               
+            return new ArrayList<>();         
         }
     }
 

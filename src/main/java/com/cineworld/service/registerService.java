@@ -8,17 +8,26 @@ import com.cineworld.config.Dbconfig;
 import com.cineworld.model.userModel;
 
 /**
- * RegisterService handles the registration of new users.
- * It manages database interactions for user registration.
+ * registerService.java
+ *
+ * Service class for handling user registration in the Cineworld application.
+ * This class connects to the database and inserts new user records based on the provided user model.
+ *
+ * Responsibilities:
+ * - Establish a database connection using Dbconfig.
+ * - registerUser(userModel): Inserts a new user into the database with values such as first name,
+ *   last name, email, role, phone number, username, and password.
+ * - Handles SQL exceptions, including duplicate entries (e.g., existing usernames or emails).
+ *
+ * Author: Dechen Lama
  */
+
+
 public class registerService {
 
     private Connection dbConn;
     private boolean isConnectionError = false;
 
-    /**
-     * Constructor initializes the database connection.
-     */
     public registerService() {
         dbConn = Dbconfig.getDbConnection();
         if (dbConn == null) {
@@ -26,9 +35,6 @@ public class registerService {
         }
     }
 
-    /**
-     * Registers a new user into the database.
-     */
     public boolean registerUser(userModel user) {
         if (isConnectionError) {
             System.err.println("Database connection is not available.");
@@ -45,12 +51,11 @@ public class registerService {
             insertStmt.setString(4, user.getRole());
             insertStmt.setString(5, user.getPhoneNumber());
             insertStmt.setString(6, user.getUsername());
-            insertStmt.setString(7, user.getPassword()); // Consider hashing passwords here
+            insertStmt.setString(7, user.getPassword()); 
 
             return insertStmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            // SQLState "23000" is commonly used for integrity constraint violation (like duplicate keys)
             if (e.getSQLState() != null && e.getSQLState().startsWith("23")) {
                 System.err.println("Registration error: Username or email may already exist.");
             } else {

@@ -1,5 +1,20 @@
 package com.cineworld.model;
 
+/**
+ * userModel.java
+ *
+ * This class represents the user entity for the Cineworld application.
+ * It serves as a data transfer object (DTO) used to encapsulate user information
+ * between the presentation layer and the database/service layers.
+ *
+ * Attributes include:
+ * - Basic identity and contact information (first name, last name, email, phone number)
+ * - Account details (username, password, role, profile image)
+ * - Multiple constructors to support different use cases (login, registration, profile view)
+ *
+ * Author: Dechen Lama
+ */
+
 public class userModel {
 		private int userId;
 		private String firstName;

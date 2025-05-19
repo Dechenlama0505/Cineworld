@@ -1,5 +1,4 @@
 package com.cineworld.DAO;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,16 +9,30 @@ import java.util.List;
 import com.cineworld.model.movieModel;
 import com.cineworld.util.DBconnection;
 
+
+/**
+ * MovieDAO handles all database operations related to the "movies" table.
+ * It allows fetching movie records, inserting new movies, updating existing ones,
+ * and deleting movies. It also provides utility methods like counting "Now Showing" movies.
+ *
+ * Methods:
+ * - getTotalNowShowingMovies(): Returns count of movies currently showing.
+ * - getAllMovies(): Retrieves a list of all movies.
+ * - addMovie(movieModel movie): Inserts a new movie into the database.
+ * - updateMovie(movieModel movie): Updates details of an existing movie.
+ * - deleteMovie(int id): Deletes a movie based on its ID.
+ *
+ * Author: Dechen
+ */
+
 public class MovieDAO {
     private Connection connection;
     
     public MovieDAO() {
-        connection = DBconnection.getConnection(); //Change to Dbconfig ani .getDbConnecton
+        connection = DBconnection.getConnection(); 
     }
     
     public int getTotalNowShowingMovies() {
-        // As per requirement, this should return 3
-        // In a real application, you would query the database
         
         try {
             String sql = "SELECT COUNT(*) FROM movies WHERE status = 'Now Showing'";
@@ -33,7 +46,7 @@ public class MovieDAO {
             e.printStackTrace();
         }
         
-        // Return 3 as fallback (as per requirement)
+       
         return 3;
     }
     
@@ -62,7 +75,7 @@ public class MovieDAO {
         return movies;
     }
     
-    // Add other methods for CRUD operations
+ 
     public boolean addMovie(movieModel  movie) {
         try {
             String sql = "INSERT INTO movies (title, status, seats_booked) VALUES (?, ?, ?)";
