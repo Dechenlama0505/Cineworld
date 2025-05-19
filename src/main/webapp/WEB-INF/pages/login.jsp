@@ -8,8 +8,20 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 </head>
 <body>
+
     <div class="container">
         <div class="login-container">
+            <%
+                String registered = request.getParameter("registered");
+                if ("true".equals(registered)) {
+            %>
+                <div class="success-message" style="color: green; background-color: #e0ffe0; padding: 10px; border-radius: 5px; margin: 0 auto 15px auto; text-align: center; max-width: 350px;">
+                    Registration successful! Please log in.
+                </div>
+            <%
+                }
+            %>
+
             <div class="logo">
                 <span class="logo-cine">CINE</span><span class="logo-world">WORLD</span>
             </div>
@@ -37,7 +49,7 @@
                     <button type="submit" class="submit-btn">Log in</button>
                 </form>
                 <form id="register" action="${pageContext.request.contextPath}/register" method="get">
-                	<input type="submit" value="Register"/>
+                    <input type="submit" value="Register"/>
                 </form>
             </div>
         </div>

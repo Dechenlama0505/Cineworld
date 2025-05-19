@@ -25,11 +25,11 @@ public class authenticationFilter implements Filter {
     };
 
     private static final String[] ADMIN_URIS = {
-        "/adminhome", "/adminwelcome", "/book", "/contactrequest", "/aboutus"
+        "/adminhome", "/adminwelcome", "/book", "/show", "/aboutus", "/admin/bookcontrol", "/moviecontroller"
     };
 
     private static final String[] USER_URIS = {
-        "/booknow", "/home", "/schedule", "/contactus"
+        "/booknow", "/home", "/schedule", "/contactus" , "/userProfile"
     };
 
     @Override

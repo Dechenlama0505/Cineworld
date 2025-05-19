@@ -19,10 +19,8 @@ public class contactrequestService {
     private boolean isConnectionError = false;
 
     public contactrequestService() {
-        try {
-            dbConn = Dbconfig.getDbConnection();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+        dbConn = Dbconfig.getDbConnection();
+        if (dbConn == null) {
             isConnectionError = true;
         }
     }
@@ -41,7 +39,7 @@ public class contactrequestService {
         try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-            	contactrequestModel contact = new contactrequestModel(
+                contactrequestModel contact = new contactrequestModel(
                     rs.getInt("id"),
                     rs.getString("name"),
                     rs.getString("email"),

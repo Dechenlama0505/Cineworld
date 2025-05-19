@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +19,22 @@
 
         <nav>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/admin/home" class="${pageContext.request.servletPath eq '/admin/home' ? 'active' : ''}">HOME</a></li>
-                <li><a href="${pageContext.request.contextPath}/admin/contactrequests" class="${pageContext.request.servletPath eq '/admin/contactrequests' ? 'active' : ''}">CONTACT REQUEST</a></li>
+                <li><a href="${pageContext.request.contextPath}/adminhome" class="${pageContext.request.servletPath eq '/adminhome' ? 'active' : ''}">HOME</a></li>
+                
+                <!-- ✅ Fixed link below -->
+                <li><a href="${pageContext.request.contextPath}/moviecontroller" class="${pageContext.request.servletPath eq '/moviecontroller' ? 'active' : ''}">MOVIE</a></li>
+                
                 <li><a href="${pageContext.request.contextPath}/admin/bookcontrol" class="${pageContext.request.servletPath eq '/admin/book' ? 'active' : ''}">BOOK</a></li>
                 <li><a href="${pageContext.request.contextPath}/aboutus" class="${pageContext.request.servletPath eq '/aboutus' ? 'active' : ''}">ABOUT US</a></li>
+                
+                <c:choose>
+                    <c:when test="${not empty sessionScope.admin}">
+                        <li><a href="${pageContext.request.contextPath}/logout" class="logout-btn">Logout</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="${pageContext.request.contextPath}/login">Logout</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </nav>
     </header>

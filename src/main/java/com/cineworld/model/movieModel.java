@@ -1,46 +1,94 @@
 package com.cineworld.model;
 
 public class movieModel {
-		private int movieId;
-		private String movieName;
-		private int movieTime;
+    private int id;
+    private String title;
+    private String status;
+    private int seatsBooked;
+    private int duration;        // previously movieTime
+    private String genres;
+    private String posterUrl;
 
-		public movieModel() {
-		}
+    // Constructors
+    public movieModel() {
+    }
 
-		public movieModel(String movieName) {
-			this.movieName = movieName;
-		}
+    public movieModel(int id, String title, String status, int seatsBooked, int duration, String genres, String posterUrl) {
+        this.id = id;
+        this.title = title;
+        this.status = status;
+        this.seatsBooked = seatsBooked;
+        this.duration = duration;
+        this.genres = genres;
+        this.posterUrl = posterUrl;
+    }
 
-		public movieModel(int movieId, String movieName, int movieTime) {
-			super();
-			this.movieId = movieId;
-			this.movieName = movieName;
-			this.movieTime = movieTime;
-		}
+    public movieModel(int id, String title) {
+        this.id = id;
+        this.title = title;
+    }
 
-		public int getMovieId() {
-			return movieId;
-		}
+    public movieModel(int id, String title, String genres, String posterUrl) {
+        this.id = id;
+        this.title = title;
+        this.genres = genres;
+        this.posterUrl = posterUrl;
+    }
 
-		public void setMovieId(int movieId) {
-			this.movieId = movieId;
-		}
+    // Getters and Setters
+    public int getId() {
+        return id;
+    }
 
-		public String getMovieName() {
-			return movieName;
-		}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-		public void setMovieName(String movieName) {
-			this.movieName = movieName;
-		}
+    public String getTitle() {
+        return title;
+    }
 
-		public int getMovieTime() {
-			return movieTime;
-		}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-		public void setMovieTime(int movieTime) {
-			this.movieTime = movieTime;
-		}
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getSeatsBooked() {
+        return seatsBooked;
+    }
+
+    public void setSeatsBooked(int seatsBooked) {
+        this.seatsBooked = seatsBooked;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getGenres() {
+        return genres;
+    }
+
+    public void setGenres(String genres) {
+        this.genres = genres;
+    }
+
+    public String getPosterUrl() {
+        return posterUrl;
+    }
+
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
+    }
 }
-

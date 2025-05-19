@@ -25,7 +25,7 @@
                         <div class="day"><h3>Monday</h3><div class="time-slot">01:00PM</div></div>
                         <div class="day"><h3>Tuesday</h3><div class="time-slot">03:00PM</div></div>
                     </div>
-                    <a href="${pageContext.request.contextPath}/book" class="book-btn">Book</a>
+                    <a href="${pageContext.request.contextPath}/booknow" class="book-btn">Book</a>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                         <div class="day"><h3>Monday</h3><div class="time-slot">01:00PM</div></div>
                         <div class="day"><h3>Tuesday</h3><div class="time-slot">03:00PM</div></div>
                     </div>
-                    <a href="${pageContext.request.contextPath}/book" class="book-btn">Book</a>
+                    <a href="${pageContext.request.contextPath}/booknow" class="book-btn">Book</a>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
                         <div class="day"><h3>Monday</h3><div class="time-slot">01:00PM</div></div>
                         <div class="day"><h3>Tuesday</h3><div class="time-slot">03:00PM</div></div>
                     </div>
-                    <a href="${pageContext.request.contextPath}/book" class="book-btn">Book</a>
+                    <a href="${pageContext.request.contextPath}/booknow" class="book-btn">Book</a>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                         <div class="day"><h3>Monday</h3><div class="time-slot">01:00PM</div></div>
                         <div class="day"><h3>Tuesday</h3><div class="time-slot">03:00PM</div></div>
                     </div>
-                    <a href="${pageContext.request.contextPath}/book" class="book-btn">Book</a>
+                    <a href="${pageContext.request.contextPath}/booknow" class="book-btn">Book</a>
                 </div>
             </div>
         </div>

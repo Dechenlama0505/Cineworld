@@ -1,8 +1,9 @@
 package com.cineworld.model;
+
 public class bookingModel {
 
     private int bookingId;
-    private int userId;
+    private String bookingName; 
     private String bookingDate;
     private String seatNumber;
     private String movie;
@@ -15,9 +16,18 @@ public class bookingModel {
         this.bookingDate = bookingDate;
     }
 
-    public bookingModel(int bookingId, int userId, String bookingDate, String seatNumber, String movie, String time) {
+    public bookingModel(int bookingId, String bookingName, String bookingDate, String seatNumber, String movie, String time) { // Changed to bookingName
         this.bookingId = bookingId;
-        this.userId = userId;
+        this.bookingName = bookingName; // Changed to bookingName
+        this.bookingDate = bookingDate;
+        this.seatNumber = seatNumber;
+        this.movie = movie;
+        this.time = time;
+    }
+    
+    public bookingModel( String bookingName, String bookingDate, String seatNumber, String movie, String time) { // Changed to bookingName
+        super();
+        this.bookingName = bookingName; // Changed to bookingName
         this.bookingDate = bookingDate;
         this.seatNumber = seatNumber;
         this.movie = movie;
@@ -34,12 +44,12 @@ public class bookingModel {
         this.bookingId = bookingId;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getBookingName() { // Changed to getBookingName
+        return bookingName;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setBookingName(String bookingName) { // Changed to setBookingName
+        this.bookingName = bookingName;
     }
 
     public String getBookingDate() {

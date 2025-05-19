@@ -9,6 +9,7 @@ public class userModel {
 		private String phoneNumber;
 		private String username;
 		private String password;
+		private String image; 
 
 		public userModel() {
 		}
@@ -31,6 +32,17 @@ public class userModel {
 			this.role = role;
 			this.phoneNumber = phoneNumber;
 			this.username = username;
+		}
+		
+		public userModel(int userId, String firstName, String lastName, String email, String role, String phoneNumber, String username, String image) {
+			this.userId = userId;
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.email = email;
+			this.role = role;
+			this.phoneNumber = phoneNumber;
+			this.username = username;
+			this.image = image;
 		}
 
 		public int getUserId() {
@@ -97,4 +109,15 @@ public class userModel {
 		public void setPassword(String password) {
 			this.password = password;
 		}
+
+
+
+		public String getImage() {
+			return image;
+		}
+
+		public void setImage(String image) {
+			this.image = image;
+		}
+		
 }

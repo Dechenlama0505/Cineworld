@@ -1,50 +1,67 @@
+// booknowController.java (User)
 package com.cineworld.controller;
 
+import com.cineworld.DAO.bookingDAO;
+import com.cineworld.model.bookingModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-@WebServlet("/booknow")
+
+@WebServlet(asyncSupported = true, urlPatterns = { "/booknow" })
 public class booknowController extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private bookingDAO bookingDAO;
+    private static final Logger logger = Logger.getLogger(booknowController.class.getName());
+
+    @Override
+    public void init() throws ServletException {
+        bookingDAO = new bookingDAO();
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Logic to prepare data (e.g., seat layout) for the JSP page
         String[] rows = {"A", "B", "C", "D"};
-        
-        // Set the seat rows as a request attribute to pass it to the JSP
         request.setAttribute("rows", rows);
-
-        // Forward the request to the booknow.jsp
         request.getRequestDispatcher("/WEB-INF/pages/booknow.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Get user input from the booking form
-        String bookingId = request.getParameter("bookingId");
         String bookingName = request.getParameter("bookingName");
         String bookingDate = request.getParameter("bookingDate");
         String bookingSeat = request.getParameter("bookingSeat");
         String bookingMovie = request.getParameter("bookingMovie");
         String bookingTime = request.getParameter("bookingTime");
 
-        // Store booking details in the session
-        HttpSession session = request.getSession();
-        session.setAttribute("bookingId", bookingId);
-        session.setAttribute("bookingName", bookingName);
-        session.setAttribute("bookingDate", bookingDate);
-        session.setAttribute("bookingSeat", bookingSeat);
-        session.setAttribute("bookingMovie", bookingMovie);
-        session.setAttribute("bookingTime", bookingTime);
+        try {
+            bookingModel booking = new bookingModel();
+            booking.setBookingName(bookingName);
+            booking.setBookingDate(bookingDate);
+            booking.setSeatNumber(bookingSeat);
+            booking.setMovie(bookingMovie);
+            booking.setTime(bookingTime);
 
-        // Redirect to the confirmation page (or any other page)
-        response.sendRedirect(request.getContextPath() + "/confirmation");
+            boolean success = bookingDAO.createBooking(booking);
+            if (success) {
+                request.setAttribute("bookingSuccess", true);
+                logger.info("Booking created successfully.");
+                response.sendRedirect(request.getContextPath() + "/confirmation"); // Redirect
+            } else {
+                request.setAttribute("bookingError", "Failed to create booking. Please try again.");
+                logger.warning("Failed to create booking.");
+                request.getRequestDispatcher("/WEB-INF/pages/booknow.jsp").forward(request, response); // Forward
+            }
+        } catch (Exception e) {
+            request.setAttribute("bookingError", "An unexpected error occurred. Please try again.");
+            logger.log(Level.SEVERE, "Exception in doPost", e);
+            request.getRequestDispatcher("/WEB-INF/pages/booknow.jsp").forward(request, response);
+        }
     }
 }
+
